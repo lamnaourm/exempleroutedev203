@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import './App.css';
+import About from './components/About';
+import Categories from './components/Categories';
+import Home from './components/Home';
+import NotFound from './components/NotFound';
+import Header from './components/Header';
+import DetailsArticles from './components/DetailsArticles';
+import Articles from './components/Articles';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+     <ul>
+        <li><NavLink to='/' >Acceuil</NavLink> </li>
+        <li><NavLink to='/categorie' >Categorie</NavLink> </li>
+        <li><NavLink to='/about' >About</NavLink> </li>
+        <li><NavLink to='/articles/1' >Article 1</NavLink> </li>
+        <li><NavLink to='/articles/2' >Article 2</NavLink> </li>
+     </ul>
+     <Routes>
+        <Route  index element={<Home />} />
+        <Route  path='/acceuil' element={<Home />} />
+        <Route  path='/categorie' element={<Categories />} />
+        <Route  path='/about' element={<About />} />
+        <Route path='/articles' element={<Articles />}>
+            <Route index element={<Articles /> } />
+            <Route  path=':code' element={<DetailsArticles />} />
+        </Route>
+        <Route  path='*' element={<NotFound />} />
+     </Routes>
     </div>
   );
 }
